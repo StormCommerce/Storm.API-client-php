@@ -1,11 +1,10 @@
 STORM API PHP
-============
+======
 
 Storm API Client is a client library for easy integration against the Storm API. This is used when building applications that calls Storm API. It wraps calls to Storm API.
 This is a PHP Client library for communication and integrating the [Storm](https://storm.io/storm-commerce/) E-commerce platform. 
 It's the equivalent of the official .NET Client from Storm Commerce that can be found [here](https://github.com/StormCommerce/Storm.API-client-dotnet). 
-
-============
+___
 
 ### Prerequisites
 
