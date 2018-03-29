@@ -1,23 +1,17 @@
-PHP Client for STORM
+STORM API PHP
 ============
 
-****
+Storm API Client is a client library for easy integration against the Storm API. This is used when building applications that calls Storm API. It wraps calls to Storm API.
+This is a PHP Client library for communication and integrating the [Storm](https://storm.io/storm-commerce/) E-commerce platform. 
+It's the equivalent of the official .NET Client from Storm Commerce that can be found [here](https://github.com/StormCommerce/Storm.API-client-dotnet). 
 
-**Version:** 1.3.1
+============
 
-**Contributors:** Bruno Lanevik - [IVEO AB](http://iveo.se)
+### Prerequisites
 
-****
+To be able to use the client to communicate with Storm you need to have an **account** set up by Storm Commerce and a client **certificate** sent to you. The certificate is unique for each application in Storm. 
 
-This is a PHP Client library for communication and integrating the [STORM](http://enferno.se/storm) E-commerce platform from Enferno AB. It's the equivalent of the official .NET Client from Enferno that can be found [here](https://enfernostormapiclient.codeplex.com/). 
-
-****
-
-###Prerequisites
-
-To be able to use the client to communicate with STORM you need to have an **account** set up by Enferno and a client **certificate** sent to you. The certificate is unique for each application in STORM. 
-
-From Enferno:
+From Storm Commerce:
 
 1. Client certificate (ClientName.pfx normally)
 2. Password for the certificate
@@ -45,11 +39,11 @@ PHP packages:
 * soap
 * session
 
-###Supported methods
+### Supported methods
 
-All operations returns an instance of StormModel or an extension of StormModel. These models support the toJson() -method which can be used to debug the returned data from STORM. 
+All operations returns an instance of StormModel or an extension of StormModel. These models support the toJson() -method which can be used to debug the returned data from Storm. 
 
-All operations available in the [StormApi](https://stormstage.enferno.se/api/1.1/docs/) are available through the proxy classes. 
+All operations available in the [StormApi](https://stormstage.enferno.se/api/21/docs/index2.html) are available through the proxy classes. 
 
 Example: 
 
@@ -72,27 +66,27 @@ $client->products()->ListParametricValues([
 ```
 
 
-###Installation
+### Installation
 
 
-####1. Start by converting the .pfx certificate obtained from Enferno to a .pem format supported by curl. 
+#### 1. Start by converting the .pfx certificate obtained from Enferno to a .pem format supported by curl. 
 
 ```
 $ openssl pkcs12 -in cert.pfx -out cert.pem -nodes
 ```
 
-####2. Add this client to your composer.json: 
+#### 2. Add this client to your composer.json: 
 
 ```
   "repositories": [
     {
       "type": "vcs",
-      "url": "git@bitbucket.org:iveo/storm-client.git"
+      "url": "https://github.com/StormCommerce/Storm.API-client-php.git"
     }
   ],
 ```
 
-####3. Install the package
+#### 3. Install the package
 
 Run this command in the project root
 
@@ -100,29 +94,29 @@ Run this command in the project root
 $ composer require iveo/storm-client
 ```
 
-####4. Generate application encryption key
-STORM saves the state of each visitor in a cookie. In this client the cookie is encrypted with a private encryption key. A script to generate the key is included in the storm-client root. This should be invoked from the storm-client root directory. 
+#### 4. Generate application encryption key
+Storm saves the state of each visitor in a cookie. In this client the cookie is encrypted with a private encryption key. A script to generate the key is included in the storm-client root. This should be invoked from the storm-client root directory. 
 
 ```
 $ cd vendor/iveo/storm-client
 $ php generate-key.php
 ```
 
-####5. Move the key to your project root
+#### 5. Move the key to your project root
 The key should be moved to the root of your project and later referenced in the configuration. Example: 
 
 ```
 $ mv key ../../../
 ```
 
-####6. Move the certificate to your project root. 
+#### 6. Move the certificate to your project root. 
 
-####7. Start Redis if not already running
+#### 7. Start Redis if not already running
 
 
-###Configuration
+### Configuration
 
-The following needs to be configured to run the STORM client: 
+The following needs to be configured to run the Storm Client: 
 
 ```
 $dirname = dirname(__FILE__);
@@ -132,8 +126,8 @@ $dirname = dirname(__FILE__);
  * certification_password: The password to the certificate obtained from Enferno
  * redis_path: Your address to redis server, e.g. tcp://127.0.0.1:6379
  * app_path: path to application encryption key
- * base_url: The base URL to the STORM API
- * image_url: The URL to the image bucket, often on azure. Obtained from Enferno
+ * base_url: The base URL to the Storm API
+ * image_url: The URL to the image bucket, often on azure. Obtained from Storm
  * expose_path: Path to your expose directory, this is used for entity resolving, operation mapping (GET/POST) and auto completion in IDE (standard PHP doc format)
  * middlewares: If any middlewares are used, configure them here. 
  */
@@ -144,7 +138,7 @@ $config =  [
     'certification_password' => 'password',
     'redis_path' => 'tcp://127.0.0.1:6379',
     'app_path' => "$dirname/key",
-    'base_url' => 'https://servicesint.enferno.se/api5/1.1/',
+    'base_url' => 'https://servicesstage.enferno.se/api/1.1/',
     'image_url' => 'http://az666937.vo.msecnd.net/42/',
     'expose_path' => "$dirname/expose",
     'middlewares' => [
@@ -155,7 +149,7 @@ $config =  [
 ];
 ```
 
-###Client instantiation
+### Client instantiation
 Instantiate the client: 
 
 ```
@@ -168,11 +162,11 @@ $client->expose()->generateClasses(); // Generate expose, only needs to run once
 
 
 
-###Examples
+### Examples
 
-All operations returns an instance of StormModel or and extension of StormModel. These models support the toJson() -method which can be used to debug the returned data from STORM. 
+All operations returns an instance of StormModel or and extension of StormModel. These models support the toJson() -method which can be used to debug the returned data from Storm. 
 
-All operations available in the [StormApi](https://stormstage.enferno.se/api/1.1/docs/) are available through the proxy classes. 
+All operations available in the [StormApi](https://stormstage.enferno.se/api/21/docs/index2.html) are available through the proxy classes. 
 
 Example: 
 
@@ -193,7 +187,7 @@ $client->products()->ListParametricValues([
     'type' => 2
 ]);
 ```
-**StormConext**
+**StormContext**
 
 The StormContext provides default session handling functionallity. It is used to track customer basketid, customerid and various storm tracking.
 
@@ -239,7 +233,7 @@ $client->shopping()->GetCheckout2($basketId);
 
 **Cancel Payment**
 
-Some methods require a Storm model to be sent. You simply pass the model object to the method and stormclient will handle the rest.
+Some methods require a Storm model to be sent. You simply pass the model object to the method and Storm Client will handle the rest.
 
 ```
 $client->shopping()->PaymentCancel($basket);
@@ -247,7 +241,7 @@ $client->shopping()->PaymentCancel($basket);
 
 **Cache**
 
-The STORM client currently only supports redis but will release update for multiple cache providers in a future release
+The Storm Client currently only supports redis but will release update for multiple cache providers in a future release
 
 You can get an instance of the cache client:
 
