@@ -1,0 +1,14 @@
+composer.phar
+vendor
+.idea/
+expose/
+.idea/workspace.xml
+*.sublime-workspace
+*.sublime-project
+cert.pfx
+
+expose/ProductService.svc?singleWsdl.wsdl
+
+
+cert.pem
+key
