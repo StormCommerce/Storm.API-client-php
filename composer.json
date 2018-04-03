@@ -1,6 +1,6 @@
 {
-  "name": "iveo/storm-client",
-  "description": "Enferno storm client",
+  "name": "storm/storm-client",
+  "description": "Storm Commerce API client",
   "minimum-stability": "stable",
   "license": "",
   "authors": [
