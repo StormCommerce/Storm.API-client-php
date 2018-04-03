@@ -68,7 +68,7 @@ $client->products()->ListParametricValues([
 ### Installation
 
 
-#### 1. Start by converting the .pfx certificate obtained from Enferno to a .pem format supported by curl. 
+#### 1. Start by converting the .pfx certificate obtained from Storm Commerce to a .pem format supported by curl. 
 
 ```
 $ openssl pkcs12 -in cert.pfx -out cert.pem -nodes
@@ -90,14 +90,14 @@ $ openssl pkcs12 -in cert.pfx -out cert.pem -nodes
 Run this command in the project root
 
 ```
-$ composer require iveo/storm-client
+$ composer require storm/storm-client
 ```
 
 #### 4. Generate application encryption key
 Storm saves the state of each visitor in a cookie. In this client the cookie is encrypted with a private encryption key. A script to generate the key is included in the storm-client root. This should be invoked from the storm-client root directory. 
 
 ```
-$ cd vendor/iveo/storm-client
+$ cd vendor/storm/storm-client
 $ php generate-key.php
 ```
 
@@ -121,8 +121,8 @@ The following needs to be configured to run the Storm Client:
 $dirname = dirname(__FILE__);
 /*
  * application_name: The name of the application is used in various cache keys and if multiple instances are running you need different names
- * certification_path: The path to the certificate file obtained and converted from Enferno
- * certification_password: The password to the certificate obtained from Enferno
+ * certification_path: The path to the certificate file obtained and converted from Storm Commerce
+ * certification_password: The password to the certificate obtained from Storm Commerce
  * redis_path: Your address to redis server, e.g. tcp://127.0.0.1:6379
  * app_path: path to application encryption key
  * base_url: The base URL to the Storm API
@@ -155,7 +155,7 @@ Instantiate the client:
 $client = StormClient::self($config);
 $client->context(); // Boots context and saves StormContext encrypted cookie
 
-$client->expose()->generateClasses(); // Generate expose, only needs to run once if Enferno updates the StormApi
+$client->expose()->generateClasses(); // Generate expose, only needs to run once if Storm Commerce updates the StormApi
 ```
 
 
